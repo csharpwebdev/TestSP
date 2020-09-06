@@ -1,0 +1,53 @@
+﻿@page
+@model Task1.Pages.IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+}
+
+@if(Model.TotalInfo != null)
+{
+    <h2>Total Count: @Model.TotalInfo.TotalCounts</h2>
+    @if(Model.TotalInfo.CategoryCounts != null)
+    {
+        foreach(var cc in Model.TotalInfo.CategoryCounts)
+        {
+            <h3>@cc.Key: @cc.Value</h3>
+        }
+    }
+}
+
+<form method="post">
+    Name: <input type="text" asp-for="Name">
+    Category: 
+    <select asp-for="Category">
+        <option value="Category1">Category 1</option>
+        <option value="Category2">Category 2</option>
+        <option value="Category3">Category 3</option>
+    </select>
+    Description: <input type="text" asp-for="Description" />
+    Price: <input type="number" asp-for="Price" />
+    <button type="submit">Add</button>
+</form>
+
+@if (Model.Products != null)
+{
+    <form method="post">
+        @foreach (var p in Model.Products)
+        {
+        <ul>
+            <li>@p.Name</li>
+            <li>@p.Category</li>
+            <li>@p.Description</li>
+            <li>@p.Price</li>
+            <li>
+                <a href="/Edit/@p._Id" class="btn btn-danger btn-sm">Edit</a>
+                <button asp-page-handler="Delete" asp-route-id="@p._Id" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm">Delete</button>
+            </li>
+        </ul>
+        }
+    </form>
+}
+
+
+

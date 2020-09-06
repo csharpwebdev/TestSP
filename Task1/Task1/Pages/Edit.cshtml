@@ -1,0 +1,25 @@
+﻿@page "/edit/{Id}"
+@model Task1.Pages.EditModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+
+
+}
+
+@if (Model.Product != null)
+{
+    <form method="post">
+        <input type="hidden" asp-for="Id" />
+        Name: <input type="text" asp-for="Product.Name">
+        Category:
+        <select asp-for="Product.Category">
+            <option value="Category1">Category 1</option>
+            <option value="Category2">Category 2</option>
+            <option value="Category3">Category 3</option>
+        </select>
+        Description: <input type="text" asp-for="Product.Description" />
+        Price: <input type="number" asp-for="Product.Price" />
+        <button type="submit">Update</button>
+    </form>
+}
